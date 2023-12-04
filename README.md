@@ -9,7 +9,7 @@
   - Traditional rasterizer. It is intended to produce pixel-perfect identical frames to existing GL renderer as possible.
   - Ray tracing. It implements real time path traced global illumination lighting with PBR materials. It will look noticeably different from original game.
 - It is intended to be merged back into upstream/master when it gets mature and stable enough.
-- Ray tracing requires 64-bit build. 32-bit drivers do not expose vulkan ray tracing extensions.
+- Ray tracing requires 64-bit build. **32-bit drivers do not expose vulkan ray tracing extensions.**
 - For more information, check out the [wiki](https://github.com/w23/xash3d-fwgs/wiki).
 - [Page on Mod DB](https://www.moddb.com/mods/half-life-rtx) (screenshots, etc).
 
