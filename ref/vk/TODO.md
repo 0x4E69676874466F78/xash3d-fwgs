@@ -13,9 +13,30 @@
 - [ ] Render graph
 - [ ] performance profiling and comparison
 
+## 2025-02-06 E391
+- [ ] rendertests
+  - [x] add cvars to renderscript
+  - [x] update gold
+  - [ ] how to tie repo state to tests state
+      - [ ] propose: add tests-referencing `RENDERTESTS_COMMIT=` envvar to gh/workflow
+- [ ] vk_studio fails ASAN
+- [x] fix zero-size asan errors in r_speeds
+
+## 2025-02-04 E390
+- [x] run render tests
+- [x] check diff wrt non-ref-vk changes
+- [ ] rendertests
+  - [ ] update gold?
+    - [ ] what happened to fresnel
+        - [x] gold before or after the new brdf? -- no gold is with new BRDF
+        - [x] is it dontnoiser? -- YES
+        - [ ] what exactly changed?
+        - [ ] fix it back
+            - [x] created issue for lifekilled: https://github.com/w23/xash3d-fwgs/issues/759
+  - [ ] weird stripes
+    - [ ] data from previous maps? why?
+
 ## 2025-01-30 E389
-- [ ] run render tests
-- [ ] check diff wrt non-ref-vk changes
 - [x] `PARM_TEX_FILTERING`
 - [x] Fix some missing textures
 

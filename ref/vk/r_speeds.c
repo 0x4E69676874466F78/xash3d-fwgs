@@ -166,8 +166,11 @@ static void drawTimeBar(uint64_t begin_time_ns, float time_scale_ms, int64_t beg
 	char tmp[64];
 	tmp[0] = '\0';
 	const int glyph_width = g_speeds.font_metrics.glyph_width;
-	Q_snprintf(tmp, Q_min(sizeof(tmp), width / glyph_width), "%s %.3fms", label, delta_ms);
-	gEngine.Con_DrawString(x, y, tmp, text_color);
+	const int box_capped_length = Q_min(sizeof(tmp), width / glyph_width);
+	if (box_capped_length > 0) {
+		Q_snprintf(tmp, box_capped_length, "%s %.3fms", label, delta_ms);
+		gEngine.Con_DrawString(x, y, tmp, text_color);
+	}
 }
 
 static void drawCPUProfilerScopes(int draw, const aprof_event_t *events, uint64_t begin_time, float time_scale_ms, uint32_t begin, uint32_t end, int y) {
@@ -475,8 +478,11 @@ static void drawGPUProfilerScopes(qboolean draw, int y, uint64_t frame_begin_tim
 				char tmp[64];
 				tmp[0] = '\0';
 				const int glyph_width = g_speeds.font_metrics.glyph_width;
-				Q_snprintf(tmp, Q_min(sizeof(tmp), width / glyph_width), "%s %.3fms", name, delta_ms);
-				gEngine.Con_DrawString(x0, bar_y, tmp, text_color);
+				const int box_capped_length = Q_min(sizeof(tmp), width / glyph_width);
+				if (box_capped_length > 0) {
+					Q_snprintf(tmp, box_capped_length, "%s %.3fms", name, delta_ms);
+					gEngine.Con_DrawString(x0, bar_y, tmp, text_color);
+				}
 
 				//drawTimeBar(frame_begin_time_ns, time_scale_ms, begin_ns, end_ns, y + i * bar_height, bar_height, name, color);
 			}
