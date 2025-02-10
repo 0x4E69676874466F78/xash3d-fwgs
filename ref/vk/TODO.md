@@ -13,13 +13,16 @@
 - [ ] Render graph
 - [ ] performance profiling and comparison
 
+## 2025-02-10 E392
+- [x] fix vk_studio ASAN fail
+
 ## 2025-02-06 E391
 - [ ] rendertests
   - [x] add cvars to renderscript
   - [x] update gold
   - [ ] how to tie repo state to tests state
       - [ ] propose: add tests-referencing `RENDERTESTS_COMMIT=` envvar to gh/workflow
-- [ ] vk_studio fails ASAN
+- [x] vk_studio fails ASAN
 - [x] fix zero-size asan errors in r_speeds
 
 ## 2025-02-04 E390

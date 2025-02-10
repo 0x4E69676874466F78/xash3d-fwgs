@@ -66,12 +66,11 @@ static struct {
 	bone_transform_t current[MAXSTUDIOBONES];
 } gb;
 
-static void studioModelCalcBones(int numbones, const mstudiobone_t *pbone, const mstudioanim_t *panim, int frame, bone_transform_t *out) {
+static void studioModelCalcBones(int numbones, const mstudiobone_t *pbone, const mstudioanim_t *panim, int frame, float interpolation, bone_transform_t *out) {
 	for(int b = 0; b < numbones; b++ ) {
 		// TODO check pbone->bonecontroller, if the bone can be dynamically controlled by entity
 		// So far we havent't seen any cases where bonecontroller presence makes static submodels dynamic
 		float *const adj = NULL;
-		const float interpolation = 0;
 		vec4_t q;
 		vec3_t pos;
 		R_StudioCalcBoneQuaternion( frame, interpolation, pbone + b, panim + b, adj, q );
@@ -132,11 +131,14 @@ static void studioModelProcessBonesAnimations(const model_t *const model, const 
 		const mstudioanim_t* const panim = gEngine.R_StudioGetAnim( (studiohdr_t*)hdr, (model_t*)model, (mstudioseqdesc_t*)pseqdesc );
 
 		// Compute the first frame bones to compare with
-		studioModelCalcBones(hdr->numbones, pbone, panim, 0, gb.first);
+		studioModelCalcBones(hdr->numbones, pbone, panim, /* frame = */ 0, /* interpolation = */ 0, gb.first);
 
 		// Compute bones for each frame
-		for (int frame = 1; frame < pseqdesc->numframes; ++frame) {
-			studioModelCalcBones(hdr->numbones, pbone, panim, frame, gb.current);
+		// Last frame is not reachable
+		const int max_frames = pseqdesc->numframes - 1;
+		for (int frame = 0; frame < max_frames; ++frame) {
+			const float interpolation = 0.9f;
+			studioModelCalcBones(hdr->numbones, pbone, panim, frame, interpolation, gb.current);
 
 			// Compate bones for each submodel
 			for (int si = 0; si < submodels_count; ++si) {
