@@ -1,6 +1,23 @@
 ## Next
 
 ## Upcoming
+- [ ] rendertests TODO
+  - [ ] script:
+    - [ ] prepares installdir in tmpfs (transient docker/podman volume?)
+    - [ ] takes vanilla valve steam HL data into installdir
+    - [ ] applies PBR texture patches given known commit id
+      - alt: vanilla HL data could already include PBR textures
+    - [ ] installs xash3d into this installdir
+    - [ ] runs headless x11/wayland session
+      - alt: expect it to be running on the platform already
+    - [ ] gets rendertests with given commit id
+    - [ ] runs rendertests
+    - [ ] generates:
+      - [ ] relevant metadata: all repos commit ids, current date, current HW (GPU, CPU, mesa+kernel vers, mem, etc)
+      - [ ] summary json with overall diff scores, and binary pass/fail result for each scene/channel
+      - [ ] huge dated archive with report and images
+  - [ ] weird stripes on some channel images
+    - [ ] data from previous maps? why?
 - [ ] framectl frame tracking, e.g.:
 	- [ ] wait for frame fence only really before actually starting to build combuf in R_BeginFrame()
 		- why: there should be nothing to synchronize with
@@ -13,9 +30,31 @@
 - [ ] Render graph
 - [ ] performance profiling and comparison
 
+## 2025-02-10 E392
+- [x] fix vk_studio ASAN fail
+
+## 2025-02-06 E391
+- [ ] rendertests
+  - [x] add cvars to renderscript
+  - [x] update gold
+  - [ ] how to tie repo state to tests state
+      - [ ] propose: add tests-referencing `RENDERTESTS_COMMIT=` envvar to gh/workflow
+- [x] vk_studio fails ASAN
+- [x] fix zero-size asan errors in r_speeds
+
+## 2025-02-04 E390
+- [x] run render tests
+- [x] check diff wrt non-ref-vk changes
+- [ ] rendertests
+  - [x] update gold?
+    - [ ] what happened to fresnel
+        - [x] gold before or after the new brdf? -- no gold is with new BRDF
+        - [x] is it dontnoiser? -- YES
+        - [ ] what exactly changed?
+        - [ ] fix it back
+            - [x] created issue for lifekilled: https://github.com/w23/xash3d-fwgs/issues/759
+
 ## 2025-01-30 E389
-- [ ] run render tests
-- [ ] check diff wrt non-ref-vk changes
 - [x] `PARM_TEX_FILTERING`
 - [x] Fix some missing textures
 
